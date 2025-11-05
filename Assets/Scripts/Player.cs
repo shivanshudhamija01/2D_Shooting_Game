@@ -6,17 +6,16 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform gunHead;
-    [SerializeField] private Transform gun;
     [SerializeField] private float bulletSpeed = 10f;
+
+    [SerializeField] private float movementSpeed = 5f;
+
+    private Vector2 moveInput;
+    
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            GunFire();
-        }
-
-        GunPointingTowardsMouse();
+        Movement();
     }
 
     // Shoot
@@ -48,6 +47,19 @@ public class Player : MonoBehaviour
         Vector3 aimDirection = GunDirection();
         float angle = Mathf.Atan2(aimDirection.y,aimDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f,0f,angle);
+    }
+
+    private void Movement(){
+        float inputx = Input.GetAxis("Horizontal");
+        float inputy = Input.GetAxis("Vertical");
+
+        moveInput = new Vector2(inputx, inputy);
+
+        transform.Translate(moveInput * movementSpeed * Time.deltaTime, Space.World);
+    }
+
+    private void UpdateAnimation(){
+
     }
     
 }
