@@ -18,9 +18,15 @@ public class AgentMovement : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        
     }
     void Start()
     {
+        if(target2 == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            target2 = player.transform;
+        }
         StartCoroutine(UpdatePathDistance());
     }
     void Update()

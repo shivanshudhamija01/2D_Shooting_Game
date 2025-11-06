@@ -22,6 +22,15 @@ public class AgentAttack : MonoBehaviour
     private float timeSincePreviousAttack = 0f;
 
     bool isPlayerInRange = false;
+
+    void Start()
+    {
+      if(target2 == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            target2 = player.transform;
+        }  
+    }
     void Update()
     {
         SearchForThePlayer();
